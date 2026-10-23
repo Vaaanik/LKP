@@ -6,13 +6,13 @@ from articles import ARTICLES
 BRAND = "Точний Тон"
 TAGLINE = "Локальний ремонт ЛКП день у день"
 CITY = "Кривий Ріг"
-DOMAIN = "https://tochnyi-ton.com.ua"          # ЗАМІНИТИ на реальний домен
-PHONE_DISPLAY = "+38 (0XX) XXX-XX-XX"           # ЗАМІНИТИ
-PHONE_TEL = "+380XXXXXXXXX"                     # ЗАМІНИТИ
-TELEGRAM = "https://t.me/your_username"         # ЗАМІНИТИ
-VIBER = "viber://chat?number=%2B380XXXXXXXXX"   # ЗАМІНИТИ
-EMAIL = "info@tochnyi-ton.com.ua"               # ЗАМІНИТИ
-ADDRESS = "м. Кривий Ріг, вул. [адреса]"        # ЗАМІНИТИ
+DOMAIN = "https://vaaanik.github.io/LKP"
+PHONE_DISPLAY = "+38 (095) 590-88-08"
+PHONE_TEL = "+380955908808"
+TELEGRAM = "https://t.me/+380955908808"
+VIBER = "viber://chat?number=%2B380955908808"
+EMAIL = "v2394454@gmail.com"
+ADDRESS = "м. Кривий Ріг, Дніпропетровська область"
 HOURS = "Пн–Сб: 09:00–19:00"
 OUT = "/home/claude/site"
 # =================================================
