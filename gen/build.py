@@ -6,7 +6,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 
 # ====== НАЛАШТУВАННЯ ======
 BRAND = "Точний Тон"
-TAGLINE = "Локальний ремонт ЛКП день у день"
+TAGLINE = "Локальний ремонт ЛКП та детейлінг для преміальних авто"
 CITY = "Кривий Ріг"
 CITY_LOC = "Кривому Розі"
 DOMAIN = "https://vaaanik.github.io/LKP"
@@ -25,31 +25,31 @@ def fdate(s):
     d = datetime.date.fromisoformat(s)
     return f"{d.day} {MONTHS[d.month-1]} {d.year}"
 
-LOGO = ('<svg class="logo" viewBox="0 0 30 38" aria-hidden="true"><defs><clipPath id="lc"><rect width="30" height="38" rx="8"/></clipPath></defs>'
-        '<g clip-path="url(#lc)"><rect width="30" height="13" fill="#9DB2FF"/><rect y="13" width="30" height="13" fill="#2447F5"/><rect y="26" width="30" height="12" fill="#101A2E"/></g></svg>')
+LOGO = ('<svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="17.5" fill="none" stroke="#CDB48A" stroke-width="1.4"/>'
+        '<circle cx="20" cy="20" r="4.6" fill="#CDB48A"/><path d="M20 1.5v7M20 31.5v7M1.5 20h7M31.5 20h7" stroke="#CDB48A" stroke-width="1.2" stroke-linecap="round"/></svg>')
 
 NAV = [("uslugy.html","Послуги"),("tsiny.html","Ціни"),("yak-ce-pratsyuye.html","Як працюємо"),
        ("materialy.html","Матеріали"),("blog/index.html","Блог"),("kontakty.html","Контакти")]
 FOOT_MORE = [("pro-nas.html","Про нас"),("blog/index.html","Блог"),("kontakty.html","Контакти")]
 
-SWATCHES = [("#F1F2F4","Білий"),("#15171B","Чорний"),("#4A515C","Графіт"),("#B9C0C9","Сріблястий"),
-            ("#1F3FA8","Синій"),("#B3202A","Червоний"),("#1E5A47","Зелений"),("#C9B79A","Бежевий")]
+SWATCHES = [("#ECEAE4","Білий перламутр"),("#0E0F12","Чорний металік"),("#4A515C","Графіт"),("#B9C0C9","Срібло"),
+            ("#1B2A4A","Темно-синій"),("#6E1420","Бордо"),("#1F4A3A","Британський зелений"),("#8A6A4A","Бронза")]
 
 # ---------- розрізи покриття ----------
-BGX = "#F4F6F9"
+BGX = "#1C1F24"
 def _notch(cx, depth, w, fill=BGX):
     pts = [(cx-w,78),(cx-w*0.5,(78+depth)/2-4),(cx-w*0.12,depth),(cx+w*0.3,depth-5),(cx+w*0.55,(78+depth)/2+3),(cx+w,78)]
     return " ".join(f"{x:.1f},{y:.1f}" for x,y in pts)
 
 def xsection(kind):
-    metal = "#7A8697"; sub_label = "Метал"
-    if kind == "bumper": metal = "#3E4452"; sub_label = "Пластик"
+    metal = "#5E6978"; sub_label = "Метал"
+    if kind == "bumper": metal = "#454B58"; sub_label = "Пластик"
     top = 78
     s = ['<svg viewBox="0 40 470 190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="__ALT__">']
     # шари
-    s.append(f'<rect x="16" y="78" width="336" height="28" fill="#CFDBFF"/>')
+    s.append(f'<rect x="16" y="78" width="336" height="28" fill="#B9C6DD"/>')
     s.append(f'<rect x="16" y="106" width="336" height="32" style="fill:var(--paint)"/>')
-    s.append(f'<rect x="16" y="138" width="336" height="22" fill="#9AA3B2"/>')
+    s.append(f'<rect x="16" y="138" width="336" height="22" fill="#7C8594"/>')
     s.append(f'<rect x="16" y="160" width="336" height="54" fill="{metal}"/>')
     alt = ""
     cx = 183
@@ -61,15 +61,15 @@ def xsection(kind):
         alt = "Розріз покриття: ліворуч поверхнева подряпина тільки в лаку, праворуч глибока подряпина до ґрунту"
         s.append(f'<polygon points="{_notch(105,98,6)}" fill="{BGX}"/>')
         s.append(f'<polygon points="{_notch(262,148,6)}" fill="{BGX}"/>')
-        s.append('<text x="105" y="62" text-anchor="middle" font-size="12.5" fill="#101A2E" font-weight="600">лак</text>')
-        s.append('<text x="262" y="62" text-anchor="middle" font-size="12.5" fill="#101A2E" font-weight="600">до ґрунту</text>')
+        s.append('<text x="105" y="62" text-anchor="middle" font-size="12.5" fill="#EDE9E2" font-weight="600">лак</text>')
+        s.append('<text x="262" y="62" text-anchor="middle" font-size="12.5" fill="#EDE9E2" font-weight="600">до ґрунту</text>')
     elif kind == "paint":
         alt = "Розріз покриття: пошкоджена зона заново заповнена ґрунтом, фарбою й лаком"
         poly = _notch(cx,170,26)
         s.append(f'<defs><clipPath id="nc"><polygon points="{poly}"/></clipPath></defs>')
-        s.append(f'<g clip-path="url(#nc)"><rect x="100" y="138" width="170" height="40" fill="#B6BDC9"/><rect x="100" y="106" width="170" height="32" style="fill:var(--paint)"/><rect x="100" y="78" width="170" height="28" fill="#CFDBFF"/></g>')
-        s.append(f'<polygon points="{poly}" fill="none" stroke="#101A2E" stroke-width="1.4" stroke-dasharray="4 3"/>')
-        s.append(f'<text x="{cx}" y="62" text-anchor="middle" font-size="12.5" fill="#101A2E" font-weight="600">нові шари</text>')
+        s.append(f'<g clip-path="url(#nc)"><rect x="100" y="138" width="170" height="40" fill="#8E96A5"/><rect x="100" y="106" width="170" height="32" style="fill:var(--paint)"/><rect x="100" y="78" width="170" height="28" fill="#B9C6DD"/></g>')
+        s.append(f'<polygon points="{poly}" fill="none" stroke="#CDB48A" stroke-width="1.4" stroke-dasharray="4 3"/>')
+        s.append(f'<text x="{cx}" y="62" text-anchor="middle" font-size="12.5" fill="#EDE9E2" font-weight="600">нові шари</text>')
     elif kind == "bumper":
         alt = "Розріз бампера: пластикова основа, задир із втратою фарби до пластика"
         s.append(f'<polygon points="{_notch(cx,166,20)}" fill="{BGX}"/>')
@@ -77,71 +77,71 @@ def xsection(kind):
         alt = "Розріз покриття: дрібні подряпини на поверхні лаку, пунктиром позначено тонкий шар, який знімається поліруванням"
         for x in (60,110,150,205,250,300):
             s.append(f'<polygon points="{_notch(x,86,3.2)}" fill="{BGX}"/>')
-        s.append('<line x1="16" y1="88" x2="352" y2="88" stroke="#101A2E" stroke-width="1.4" stroke-dasharray="5 4"/>')
-        s.append('<text x="16" y="62" font-size="12.5" fill="#101A2E" font-weight="600">пунктир: тонкий шар лаку, що знімається</text>')
+        s.append('<line x1="16" y1="88" x2="352" y2="88" stroke="#CDB48A" stroke-width="1.4" stroke-dasharray="5 4"/>')
+        s.append('<text x="16" y="62" font-size="12.5" fill="#EDE9E2" font-weight="600">пунктир: тонкий шар лаку, що знімається</text>')
     elif kind == "protect":
         alt = "Розріз покриття: поверх лаку нанесено тонкий захисний шар"
-        s.append('<rect x="16" y="70" width="336" height="8" fill="#6F8CFF"/>')
+        s.append('<rect x="16" y="70" width="336" height="8" fill="#CDB48A"/>')
     s.append(f'<rect x="16" y="78" width="336" height="0.0" fill="none"/>')
     # підписи
     labels = [(92,"Лак"),(122,"Фарба (база)"),(149,"Ґрунт"),(187,sub_label)]
     if kind == "protect": labels = [(74,"Захист")] + [(y+2,t) for y,t in labels]
     for y,t in labels:
-        s.append(f'<line x1="354" y1="{y}" x2="362" y2="{y}" stroke="#556176" stroke-width="1.2"/>')
-        s.append(f'<text x="368" y="{y+4.5}" font-size="13" fill="#101A2E">{t}</text>')
+        s.append(f'<line x1="354" y1="{y}" x2="362" y2="{y}" stroke="#9C9890" stroke-width="1.2"/>')
+        s.append(f'<text x="368" y="{y+4.5}" font-size="13" fill="#EDE9E2">{t}</text>')
     s.append('</svg>')
     return "".join(s).replace("__ALT__", alt)
 
 SERVICES = [
- dict(id="skoly", tab="Сколи", small="від 1 000 ₴", kind="skol",
+ dict(id="skoly", tab="Сколи", small="від 1 500 ₴", kind="skol",
       h="Скол доходить до металу — і починається корозія",
-      p="Вода потрапляє в оголений метал, і за кілька тижнів навколо скола з'являється бульбашка. Очищаємо, за потреби обробляємо метал, заповнюємо кратер ґрунтом, базою та лаком і вирівнюємо поверхню.",
-      spec=[("Ціна","від 1 000 ₴"),("Час","3–4 год"),("Обсяг","до 3 сколів на деталі")],
+      p="Вода потрапляє в оголений метал, і за кілька тижнів навколо скола з'являється бульбашка. Очищаємо, за потреби обробляємо метал, заповнюємо кратер ґрунтом, базою та лаком і вирівнюємо поверхню до рівня заводської.",
+      spec=[("Ціна","від 1 500 ₴"),("Час","3–4 год"),("Обсяг","до 3 сколів на деталі")],
       link=("blog/skol-na-kapoti-koroziya.html","Чому не варто чекати до весни")),
- dict(id="podryapyny", tab="Подряпини", small="від 1 500 ₴", kind="scratch",
+ dict(id="podryapyny", tab="Подряпини", small="від 2 500 ₴", kind="scratch",
       h="Ніготь не чіпляється — це лак. Чіпляється — глибше",
-      p="Поверхневу подряпину прибираємо поліруванням. Глибоку, до ґрунту чи металу, поліруванням не зняти: знімати лак до нуля небезпечно, тому фарбуємо локально. Що підходить вашому випадку, скажемо на огляді.",
-      spec=[("Полірування","від 1 500 ₴"),("Фарбування","від 3 500 ₴"),("Час","1–2 год або 1 день")],
+      p="Поверхневу подряпину прибираємо поліруванням: так зберігається максимум заводського лаку. Глибоку, до ґрунту чи металу, поліруванням не зняти, а знімати лак до нуля небезпечно, тому фарбуємо локально. Що підходить вашому випадку, скажемо на огляді.",
+      spec=[("Полірування","від 2 500 ₴"),("Локальне фарбування","від 5 000 ₴"),("Час","1–2 год або 1 день")],
       link=("blog/podryapina-polirovka-chy-farbuvannya.html","Полірування чи фарбування")),
- dict(id="farbuvannya", tab="Локальне фарбування", small="від 3 500 ₴", kind="paint",
+ dict(id="farbuvannya", tab="Локальне фарбування", small="від 5 000 ₴", kind="paint",
       h="Фарбуємо тільки пошкоджену зону, не всю деталь",
-      p="Видаляємо пошкоджене покриття, відновлюємо ґрунт, наносимо базу в колір кузова з плавним переходом і закриваємо лаком. Швидше і економніше за фарбування цілої деталі. Якщо пошкодження велике, чесно скажемо, що краще перефарбувати елемент.",
-      spec=[("Ціна","від 3 500 ₴"),("Елемент повністю","від 9 000 ₴"),("Час","1 день")],
+      p="Видаляємо пошкоджене покриття, відновлюємо ґрунт, наносимо базу в колір кузова з плавним переходом і закриваємо лаком. Заводська фарба навколо зони лишається недоторканою. Якщо пошкодження велике, чесно скажемо, що краще перефарбувати елемент.",
+      spec=[("Локальна зона","від 5 000 ₴"),("Елемент повністю","від 12 000 ₴"),("Час","1 день")],
       link=("blog/lokalne-farbuvannya-yak-pratsyuye.html","Як це працює крок за кроком")),
- dict(id="bampery", tab="Бампери", small="від 4 500 ₴", kind="bumper",
+ dict(id="bampery", tab="Бампери", small="від 6 000 ₴", kind="bumper",
       h="Пластик ремонтуємо іншими матеріалами, ніж метал",
       p="Потертості від бордюрів, задири, невеликі тріщини. Використовуємо адгезійні ґрунти для пластика й еластичні склади, щоб фарба трималась. Якщо бампер розколотий, підкажемо, що вигідніше: ремонт чи заміна.",
-      spec=[("Ціна","від 4 500 ₴"),("Час","1 день")],
+      spec=[("Ціна","від 6 000 ₴"),("Час","1 день")],
       link=("blog/remont-bampera-plastyk.html","Ремонт чи заміна")),
- dict(id="polirovanya", tab="Полірування", small="від 700 ₴", kind="polish",
+ dict(id="polirovanya", tab="Полірування", small="від 1 200 ₴", kind="polish",
       h="Знімаємо тонкий шар лаку, щоб вирівняти поверхню",
       p="Прибирає «павутинку» від мийок, дрібні подряпини й матовість. Перед роботою вимірюємо товщину покриття, щоб не зняти зайвого. Глибокі подряпини, сколи й облізання лаку поліруванням не лікуються.",
-      spec=[("Елемент","від 700 ₴"),("Освіжаюче, весь кузов","від 4 000 ₴"),("Відновлювальне","від 7 000 ₴")],
+      spec=[("Елемент","від 1 200 ₴"),("Освіжаюче, весь кузов","від 6 000 ₴"),("Відновлювальне","від 10 000 ₴")],
       link=("blog/vidnovlyuvalne-poliruvannya.html","Що вміє полірування")),
- dict(id="zakhyst", tab="Захист", small="від 600 ₴", kind="protect",
+ dict(id="zakhyst", tab="Захист", small="від 800 ₴", kind="protect",
       h="Захист після ремонту: віск, кварц, кераміка, антидощ",
       p="Свіжий лак потребує кількох тижнів, щоб повністю затвердіти, тому захист наносимо за нашою рекомендацією. Антидощ на скло можна наносити будь-коли.",
-      spec=[("Антидощ","від 600 ₴"),("Віск","від 1 500 ₴"),("Кварц, кераміка","від 6 000 ₴")],
+      spec=[("Антидощ","від 800 ₴"),("Віск","від 2 000 ₴"),("Кварц, кераміка","від 8 000 ₴")],
       link=("blog/zakhyst-pislya-remontu.html","Віск, кварц чи кераміка")),
 ]
 
 PRICES = [
  ("Сколи та подряпини", [
-  ("Усунення сколів", "до 3 сколів на одній деталі", "від 1 000 ₴", "3–4 год"),
-  ("Усунення подряпин поліруванням", "поверхневі, без глибоких пошкоджень", "від 1 500 ₴", "1–2 год"),
-  ("Усунення глибокої подряпини", "локальне фарбування зони", "від 3 500 ₴", "1 день")]),
+  ("Усунення сколів", "до 3 сколів на одній деталі", "від 1 500 ₴", "3–4 год"),
+  ("Усунення подряпин поліруванням", "поверхневі, без глибоких пошкоджень", "від 2 500 ₴", "1–2 год"),
+  ("Усунення глибокої подряпини", "локальне фарбування зони", "від 5 000 ₴", "1 день")]),
  ("Локальне та повне фарбування", [
-  ("Локальне фарбування", "ділянка до ~15×15 см", "від 3 500 ₴", "1 день"),
-  ("Фарбування елемента кузова", "матеріали включено у вартість", "від 9 000 ₴", "1–2 дні"),
-  ("Ремонт і фарбування бампера", "пластик, потертості, задири", "від 4 500 ₴", "1 день")]),
+  ("Локальне фарбування", "ділянка до ~15×15 см", "від 5 000 ₴", "1 день"),
+  ("Фарбування елемента кузова", "матеріали включено у вартість", "від 12 000 ₴", "1–2 дні"),
+  ("Ремонт і фарбування бампера", "пластик, потертості, задири", "від 6 000 ₴", "1 день")]),
  ("Полірування", [
-  ("Освіжаюче полірування кузова", "дрібні подряпини, блиск", "від 4 000 ₴", "1 день"),
-  ("Відновлювальне полірування кузова", "середні подряпини, «павутинка»", "від 7 000 ₴", "1–2 дні"),
-  ("Полірування окремого елемента", "двері, капот, крило", "від 700 ₴", "1–2 год")]),
+  ("Освіжаюче полірування кузова", "дрібні подряпини, блиск", "від 6 000 ₴", "1 день"),
+  ("Відновлювальне полірування кузова", "середні подряпини, «павутинка»", "від 10 000 ₴", "1–2 дні"),
+  ("Полірування окремого елемента", "двері, капот, крило", "від 1 200 ₴", "1–2 год")]),
  ("Захист", [
-  ("Антидощ на скло", "лобове або бокові скла", "від 600 ₴", "30–60 хв"),
-  ("Віск на кузов", "блиск і легка гідрофобність", "від 1 500 ₴", "2–3 год"),
-  ("Кварцеве / керамічне покриття", "залежить від покриття та авто", "від 6 000 ₴", "1–2 дні")]),
+  ("Антидощ на скло", "лобове або бокові скла", "від 800 ₴", "30–60 хв"),
+  ("Віск на кузов", "блиск і легка гідрофобність", "від 2 000 ₴", "2–3 год"),
+  ("Кварцеве / керамічне покриття", "залежить від покриття та авто", "від 8 000 ₴", "1–2 дні")]),
 ]
 
 MATERIALS = [
@@ -179,12 +179,12 @@ def head(title, desc, root, path, extra=""):
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{title}</title>
 <meta name="description" content="{desc}">
-<meta name="theme-color" content="#ECEFF3">
+<meta name="theme-color" content="#0B0C0E">
 <link rel="canonical" href="{canon}">
 <meta property="og:title" content="{title}"><meta property="og:description" content="{desc}">
 <meta property="og:type" content="website"><meta property="og:locale" content="uk_UA"><meta property="og:url" content="{canon}">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@300;400;500;600;700&display=swap&subset=cyrillic" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Onest:wght@300;400;500&display=swap&subset=cyrillic" rel="stylesheet">
 <link rel="stylesheet" href="{root}assets/style.css">
 {extra}
 </head><body><a class="skip" href="#main">До змісту</a>'''
@@ -192,22 +192,22 @@ def head(title, desc, root, path, extra=""):
 def header(root, active):
     links = "".join(f'<a href="{root}{h}"{" aria-current=page" if h==active else ""}>{t}</a>' for h,t in NAV)
     return f'''<header class="top"><div class="wrap bar">
-<a class="brand" href="{root}index.html" aria-label="{BRAND}, на головну">{LOGO}<span><b>{BRAND}</b><small>ремонт ЛКП, {CITY}</small></span></a>
+<a class="brand" href="{root}index.html" aria-label="{BRAND}, на головну">{LOGO}<span><b>{BRAND}</b><small>ремонт ЛКП та детейлінг</small></span></a>
 <nav class="main" id="nav" aria-label="Основна навігація">{links}</nav>
-<a class="btn pri sm" href="tel:{PHONE_TEL}" style="margin-left:8px" id="hdr-call">Зателефонувати</a>
+<a class="btn pri sm" href="tel:{PHONE_TEL}" style="margin-left:8px" id="hdr-call">Записатися</a>
 <button class="burger" aria-label="Меню" aria-expanded="false" aria-controls="nav">Меню</button>
 </div></header><main id="main">'''
 
 def cta(root):
-    return f'''<section class="cta"><div class="wrap cta-in"><div><h2>Надішліть фото — скажемо ціну і час</h2>
-<p>Напишіть марку, модель і колір авто та додайте 2–3 фото пошкодження. Відповімо в робочий час.</p></div>
+    return f'''<section class="cta"><div class="wrap cta-in"><div><h2>Покажіть нам скол або подряпину</h2>
+<p>Надішліть 2–3 фото та дані авто. Скажемо, чи вистачить локального ремонту, і назвемо вартість до початку робіт.</p></div>
 <div class="btns" style="margin:0"><a class="btn pri" href="{TELEGRAM}">Написати в Telegram</a><a class="btn sec" href="{VIBER}">Viber</a><a class="btn sec" href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a></div></div></section>'''
 
 def footer(root):
     mk = lambda items: "".join(f'<a href="{root}{h}">{t}</a>' for h,t in items)
     return f'''</main><footer class="foot"><div class="wrap fgrid">
-<div><a class="brand" href="{root}index.html">{LOGO}<span><b>{BRAND}</b><small>ремонт ЛКП, {CITY}</small></span></a>
-<p style="margin-top:16px">{TAGLINE}. Сколи, подряпини, локальне фарбування, полірування й захист кузова.</p></div>
+<div><a class="brand" href="{root}index.html">{LOGO}<span><b>{BRAND}</b><small>ремонт ЛКП та детейлінг</small></span></a>
+<p style="margin-top:16px">{TAGLINE}. Зберігаємо заводську фарбу: усуваємо сколи й подряпини локально.</p></div>
 <div><h4>Послуги</h4>{mk(NAV[:3])}</div>
 <div><h4>Сайт</h4>{"".join(f'<a href="{root}{h}">{t}</a>' for h,t in [("materialy.html","Матеріали")]+FOOT_MORE)}</div>
 <div><h4>Контакти</h4><a href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a><a href="{TELEGRAM}">Telegram</a><a href="{VIBER}">Viber</a><a href="mailto:{EMAIL}">{EMAIL}</a><span>{ADDRESS}</span><span>{HOURS}</span></div>
@@ -239,7 +239,7 @@ def post_rows(arts, tagged=False):
     return "".join(f'<a class="post" href="{{{{root}}}}blog/{a["slug"]}.html" data-tag="{a["tag"]}"><time datetime="{a["date"]}">{fdate(a["date"])}</time><div><span class="tagc">{a["tag"]}</span><h3>{a["title"]}</h3><p>{a["desc"]}</p></div><span class="m">{a["min"]} хв</span></a>' for a in arts)
 
 def lab():
-    sw = "".join(f'<label class="sw"><input type="radio" name="paint" value="{h}" data-name="{n}"{" checked" if h=="#1F3FA8" else ""} aria-label="{n}"><span style="--c:{h}"></span></label>' for h,n in SWATCHES)
+    sw = "".join(f'<label class="sw"><input type="radio" name="paint" value="{h}" data-name="{n}"{" checked" if h=="#1B2A4A" else ""} aria-label="{n}"><span style="--c:{h}"></span></label>' for h,n in SWATCHES)
     def panel(cls, dmg=""):
         return f'<div class="panel {cls}" aria-hidden="true"><div class="glass"></div><div class="gap"></div><div class="shoulder"></div><div class="handle-d"></div>{dmg}</div>'
     dmg = ('<span class="scratch" style="left:10%;top:62%;width:34%;transform:rotate(-12deg)"></span>'
@@ -256,7 +256,7 @@ def lab():
 <input class="ba-range" type="range" min="0" max="100" value="50" step="0.5" aria-label="Порівняння: до та після ремонту">
 <div class="knob-line" aria-hidden="true"><div class="knob"></div></div>
 </div>
-<figcaption><span>Ілюстрація: двері авто, колір <b id="colname">Синій</b></span><span>Тягніть повзунок</span></figcaption>
+<figcaption><span>Ілюстрація: двері авто, колір <b id="colname">Темно-синій</b></span><span>Тягніть повзунок</span></figcaption>
 <fieldset class="swatches"><legend>Оберіть колір свого авто</legend>{sw}</fieldset>
 </figure>'''
 
@@ -275,21 +275,44 @@ def home():
     body = f'''
 <section class="hero"><div class="wrap hero-grid">
 <div class="hero-copy">
-<h1>Ремонт фарби кузова за один день</h1>
-<p class="lead">Усуваємо сколи, подряпини й потертості в Кривому Розі. Колір готуємо за кодом виробника і звіряємо з вашим авто при денному світлі.</p>
-<div class="btns"><a class="btn pri" href="tel:{PHONE_TEL}">Зателефонувати</a><a class="btn sec" href="{TELEGRAM}">Надіслати фото в Telegram</a></div>
+<h1>Скол зникає.<br>Заводська фарба залишається.</h1>
+<p class="lead">Локальний ремонт ЛКП та детейлінг для авто преміум-сегмента в Кривому Розі. Не перефарбовуємо деталь: відновлюємо лише пошкоджену зону, щоб її неможливо було знайти.</p>
+<div class="btns"><a class="btn pri" href="tel:{PHONE_TEL}">Записатися на огляд</a><a class="btn sec" href="{TELEGRAM}">Надіслати фото</a></div>
 </div>
 {lab()}
 </div>
-<ul class="facts"><li><b>Огляд</b>безкоштовний</li><li><b>Сколи й подряпини</b>зазвичай за 1 день</li><li><b>Ціна</b>називаємо до початку робіт</li></ul></section>
+<ul class="facts"><li><b>Заводський шар</b>зберігаємо навколо ремонту</li><li><b>Товщина покриття</b>вимірюємо до початку робіт</li><li><b>Колір</b>за кодом і під денне світло</li><li><b>Строк</b>сколи й подряпини за 1 день</li></ul></section>
 
-<section class="s white"><div class="wrap"><div class="s-head"><h2>Що саме пошкоджено — залежить від глибини</h2>
-<p>Покриття складається з чотирьох шарів. Від того, до якого шару дійшла подряпина чи скол, залежить, чи вистачить полірування, чи потрібне фарбування.</p></div>
+<section class="s"><div class="wrap"><div class="s-head"><h2>Навіщо перефарбовувати всю деталь, якщо пошкоджено сантиметр</h2>
+<p>Повне фарбування знімає заводський шар по всій площі. Локальний ремонт працює лише там, де є пошкодження, і залишає решту покриття як є.</p></div>
+<div class="versus">
+<div class="vs main"><h3>Локальний ремонт</h3><p>Наш підхід</p><ul>
+<li>Заводські лак і фарба поруч із зоною залишаються недоторканими</li>
+<li>Мінімальна площа втручання, а отже, мінімум слідів ремонту</li>
+<li>Колір готуємо під ваш кузов, перехід розтушовуємо непомітно</li>
+<li>Сколи й подряпини зазвичай за один день</li></ul></div>
+<div class="vs"><h3>Фарбування всієї деталі</h3><p>Іноді потрібне, але не завжди</p><ul>
+<li>Заводське покриття знімається по всій панелі</li>
+<li>Складні кольори (перламутр, тришарові) важче збігти на великій площі</li>
+<li>Більше матеріалів, часу й вартості</li>
+<li>Ризик різниці з сусідніми деталями</li></ul></div></div>
+<p class="mut" style="margin-top:28px;max-width:62ch">Якщо пошкодження велике і локальний ремонт не дасть результату, скажемо про це чесно й запропонуємо перефарбувати елемент.</p></div></section>
+
+<section class="s alt"><div class="wrap"><div class="s-head"><h2>Що пошкоджено в покритті, те й лагодимо</h2>
+<p>Покриття складається з чотирьох шарів. Від того, до якого шару дійшла подряпина чи скол, залежить, чи вистачить полірування, чи потрібне локальне фарбування.</p></div>
 <div class="tabs"><div class="tablist" role="tablist" aria-label="Види ремонту" aria-orientation="vertical">{tabs_btn}</div><div>{tabs_pan}</div></div></div></section>
 
-<section class="s dark"><div class="wrap day"><div><h2>Як виглядає один день ремонту</h2>
+<section class="s"><div class="wrap"><div class="s-head"><h2>Стандарт роботи</h2><p>Те, що ми робимо щоразу, незалежно від розміру пошкодження.</p></div>
+<div class="ledger">
+<div><h3>Діагностика</h3><p>Розглядаємо пошкодження під світлом, вимірюємо товщину покриття, визначаємо глибину й чесно називаємо метод.</p><small>до початку робіт</small></div>
+<div><h3>Колір</h3><p>Готуємо за кодом виробника, коригуємо під ваш кузов, зразок звіряємо при денному світлі.</p><small>непомітний перехід</small></div>
+<div><h3>Мінімальна зона</h3><p>Працюємо на ділянці скола чи подряпини й розтушовуємо перехід, не чіпаючи решту деталі.</p><small>заводська фарба зберігається</small></div>
+<div><h3>Видача</h3><p>Показуємо результат при денному світлі й пояснюємо, як доглядати за свіжим покриттям.</p><small>день у день</small></div>
+</div></div></section>
+
+<section class="s alt"><div class="wrap day"><div><h2>Як виглядає один день ремонту</h2>
 <p class="lead">Типовий графік для сколів, подряпин і локальних ділянок. Цілу деталь або складний колір можемо вести 1–2 дні — скажемо заздалегідь.</p>
-<div class="btns"><a class="btn" style="background:#fff;color:var(--ink)" href="yak-ce-pratsyuye.html">Детальніше про процес</a></div></div>
+<div class="btns"><a class="btn sec" href="yak-ce-pratsyuye.html">Детальніше про процес</a></div></div>
 <ol class="tl">{day}</ol></div></section>
 
 <section class="s"><div class="wrap two"><div><h2>Один код фарби, кілька відтінків</h2>
@@ -297,13 +320,13 @@ def home():
 <p style="margin-top:20px"><a class="lnk" href="blog/kod-farby-pidbir-koljoru.html">Де знайти код фарби і як ми підбираємо колір</a></p></div>
 <div class="fan" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div></div></section>
 
-<section class="s white"><div class="wrap"><div class="s-head"><h2>Популярні роботи й ціни</h2><p>Мінімальна вартість. Точну називаємо після огляду.</p></div>
+<section class="s alt"><div class="wrap"><div class="s-head"><h2>Популярні роботи й ціни</h2><p>Мінімальна вартість. Точну називаємо після огляду.</p></div>
 <div class="rows">{price_rows}</div><p style="margin-top:24px"><a class="lnk" href="tsiny.html">Повний прайс</a></p></div></section>
 
-<section class="s"><div class="wrap"><div class="s-head"><h2>Працюємо з перевіреними матеріалами</h2><p>Лаки, ґрунти, полірувальні системи й захисні покриття відомих виробників. Це наш робочий інструмент: ми не продаємо матеріали, а застосовуємо їх у ремонті.</p></div>
+<section class="s"><div class="wrap"><div class="s-head"><h2>Матеріали професійного рівня</h2><p>Лаки, ґрунти, полірувальні системи й захисні покриття відомих виробників. Це наш робочий інструмент: ми не продаємо матеріали, а застосовуємо їх у ремонті.</p></div>
 <div class="brands">{brands}</div><p style="margin-top:28px"><a class="lnk" href="materialy.html">Усі категорії матеріалів</a></p></div></section>
 
-<section class="s white"><div class="wrap"><div class="s-head"><h2>Питання, які ставлять найчастіше</h2></div><div class="faq">{faq}</div></div></section>
+<section class="s alt"><div class="wrap"><div class="s-head"><h2>Питання, які ставлять найчастіше</h2></div><div class="faq">{faq}</div></div></section>
 
 <section class="s"><div class="wrap"><div class="s-head" style="display:flex;justify-content:space-between;align-items:end;max-width:none"><h2 style="margin:0">З блогу</h2><a class="lnk" href="blog/index.html">Усі статті</a></div>
 <div class="posts">{post_rows(latest)}</div></div></section>
@@ -313,7 +336,7 @@ def home():
           "telephone":PHONE_TEL,"url":DOMAIN,"email":EMAIL,"openingHours":"Mo-Sa 09:00-19:00","areaServed":CITY}
     fq = {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":q,"acceptedAnswer":{"@type":"Answer","text":a}} for q,a in FAQ]}
     extra = f'<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script><script type="application/ld+json">{json.dumps(fq, ensure_ascii=False)}</script>'
-    page("index.html", f"{BRAND}: ремонт ЛКП за один день у {CITY_LOC}", "Усунення сколів і подряпин, локальне фарбування, полірування й захист кузова в Кривому Розі. Колір за кодом, ціна до початку робіт.", body, "index.html", extra)
+    page("index.html", f"{BRAND}: локальний ремонт ЛКП та детейлінг преміум-авто у {CITY_LOC}", "Усуваємо сколи й подряпини локально, зберігаючи заводську фарбу. Колір за кодом, полірування, захист кузова. Кривий Ріг.", body, "index.html", extra)
 
 def uslugy():
     rows = ""
@@ -334,10 +357,10 @@ def tsiny():
 
 def process():
     day = "".join(f'<li><time>{t}</time><i></i><div><h3>{h}</h3><p>{d}</p></div></li>' for t,h,d in DAY)
-    body = f'''<section class="s dark"><div class="wrap"><h1 style="color:#fff;font-size:clamp(32px,4.6vw,56px)">Як ми працюємо</h1><p class="lead" style="margin-bottom:48px">Типовий графік для сколів, подряпин і локальних ділянок. Привезли зранку, забрали ввечері.</p>
+    body = f'''<section class="s"><div class="wrap"><h1 style="font-size:clamp(32px,4.6vw,56px)">Як ми працюємо</h1><p class="lead" style="margin-bottom:48px">Типовий графік для сколів, подряпин і локальних ділянок. Привезли зранку, забрали ввечері.</p>
 <div class="day" style="grid-template-columns:1fr"><ol class="tl" style="max-width:760px">{day}</ol></div>
 <p class="mut small" style="margin-top:32px;max-width:60ch">Цілу деталь, складні кольори (перламутр, тришарові) й великі пошкодження можуть потребувати 1–2 днів. Про це скажемо під час огляду.</p>
-<p style="margin-top:20px"><a class="lnk" style="color:#9DB2FF" href="blog/lokalne-farbuvannya-yak-pratsyuye.html">Детальніше про технологію локального ремонту</a></p></div></section>'''
+<p style="margin-top:20px"><a class="lnk" href="blog/lokalne-farbuvannya-yak-pratsyuye.html">Детальніше про технологію локального ремонту</a></p></div></section>'''
     page("yak-ce-pratsyuye.html", f"Як ми працюємо: {BRAND}, {CITY}", "Етапи локального ремонту ЛКП від огляду до видачі авто за один день.", body)
 
 def materials():
@@ -351,7 +374,7 @@ def about():
     body = page_head("Про нас", f"{BRAND} — майстерня локального ремонту лакофарбового покриття в {CITY_LOC}. Працюємо з невеликими пошкодженнями і робимо їх швидко.") + f'''
 <section class="s tight" style="padding-top:0"><div class="wrap narrow"><div class="prose"><h2>Наші принципи</h2>
 <ul><li><b>Чесна оцінка.</b> Якщо вистачить полірування, не пропонуємо фарбування.</li>
-<li><b>Мінімальне втручання.</b> Ремонтуємо лише пошкоджену зону.</li>
+<li><b>Зберігаємо заводську фарбу.</b> Ремонтуємо лише пошкоджену зону, а не перефарбовуємо всю деталь.</li>
 <li><b>Ціна до початку робіт.</b> Якщо обсяг зміниться, зупинимось і погодимо.</li>
 <li><b>Колір при денному світлі.</b> Звіряємо зразок із вашим кузовом до нанесення.</li></ul>
 <h2>Чого ми не робимо</h2><p>Не беремося за кузовні роботи зі зварюванням і відновленням геометрії після серйозних ДТП. Якщо ваш випадок потребує цього, підкажемо, до кого звернутися.</p></div></div></section>'''
@@ -395,7 +418,7 @@ def blog():
 <h1>{a["title"]}</h1><p class="meta"><time datetime="{a["date"]}">{fdate(a["date"])}</time>, {a["min"]} хв читання</p>
 <div class="prose">{a["body"]}</div></div>
 <aside class="aside"><h3>Потрібен ремонт?</h3><p>Надішліть фото пошкодження — скажемо ціну й час.</p><a class="btn pri" href="{TELEGRAM}">Telegram</a><a class="btn sec" href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a></aside></div></article>
-<section class="s white"><div class="wrap"><div class="s-head"><h2>Читайте також</h2></div><div class="posts">{post_rows(others).replace("{{root}}blog/","")}</div></div></section>'''
+<section class="s alt"><div class="wrap"><div class="s-head"><h2>Читайте також</h2></div><div class="posts">{post_rows(others).replace("{{root}}blog/","")}</div></div></section>'''
         page(f"blog/{a['slug']}.html", f'{a["title"]}: {BRAND}', a["desc"], body, "blog/index.html", extra, with_cta=False)
 
 def notfound():
